@@ -1,3 +1,5 @@
+import { graphPadding } from "../constants/constants.js";
+
 // --- Функция для рисования стрелки на концах осей ---
 export function drawAxisArrow(ctx, x0, y0, x1, y1, size = 14, color = "#222") {
   const angle = Math.atan2(y1 - y0, x1 - x0);
@@ -20,7 +22,7 @@ export function drawAxisArrow(ctx, x0, y0, x1, y1, size = 14, color = "#222") {
   ctx.restore();
 }
 
-function drawGrid({ ctx, canvas, axes, config}) {
+function drawGrid({ ctx, canvas, axes, config }) {
   const xMin = Number(axes.xMin);
   const xMax = Number(axes.xMax);
   const yMin = Number(axes.yMin);
@@ -28,15 +30,16 @@ function drawGrid({ ctx, canvas, axes, config}) {
   const xLabel = axes.xLabel;
   const yLabel = axes.yLabel;
 
-  const padX = canvas.width * 0.05;
-  const padY = canvas.height * 0.05;
+  const padX = canvas.width * graphPadding.PAD_X;
+  const padY = canvas.height * graphPadding.PAD_Y;
   const graphLeft = padX;
   const graphTop = padY;
   const graphRight = canvas.width - padX;
   const graphBottom = canvas.height - padY;
 
   const steps = Number(config.grid?.steps) || 10;
-  let showGrid = window.econShowGrid !== undefined
+  let showGrid =
+    window.econShowGrid !== undefined
       ? window.econShowGrid
       : !!config.grid?.enabled;
   if (
@@ -60,7 +63,7 @@ function drawGrid({ ctx, canvas, axes, config}) {
       let xVal = xMin + (i * (xMax - xMin)) / steps;
       ctx.textAlign = "center";
       ctx.textBaseline = "top";
-      ctx.fillText(xVal.toFixed(1), x, graphBottom + 2);
+      ctx.fillText(Math.round(xVal), x, graphBottom + 2);
     }
     // Горизонтальные линии и подписи Y
     for (let i = 0; i <= steps; ++i) {
@@ -70,9 +73,10 @@ function drawGrid({ ctx, canvas, axes, config}) {
       ctx.lineTo(graphRight, y);
       ctx.stroke();
       let yVal = yMin + (i * (yMax - yMin)) / steps;
+
       ctx.textAlign = "right";
       ctx.textBaseline = "middle";
-      ctx.fillText(yVal.toFixed(1), graphLeft - 6, y);
+      ctx.fillText(Math.round(yVal), graphLeft - 6, y);
     }
   }
 
@@ -95,8 +99,8 @@ export function drawAxis({ canvasId, graphName }) {
       ? config.axes[graphName]
       : config.axis;
 
-  const padX = canvas.width * 0.05;
-  const padY = canvas.height * 0.05;
+  const padX = canvas.width * graphPadding.PAD_X;
+  const padY = canvas.height * graphPadding.PAD_Y;
   const graphLeft = padX;
   const graphTop = padY;
   const graphRight = canvas.width - padX;
@@ -127,5 +131,5 @@ export function drawAxis({ canvasId, graphName }) {
   );
   drawAxisArrow(ctx, graphLeft, graphTop + 28, graphLeft, graphTop, 12, "#222");
 
-  drawGrid({ ctx, canvas, axes, config});
+  drawGrid({ ctx, canvas, axes, config });
 }

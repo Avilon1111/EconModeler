@@ -1,12 +1,12 @@
-import { graphType, graphMode } from "../constants/constants.js";
+import { graphType, graphMode, graphPadding} from "../constants/constants.js";
 
 export function drawCurve({ ctx, curve, formulaFn, canvas, axes, type }) {
   const xMin = Number(axes.xMin);
   const xMax = Number(axes.xMax);
   const yMin = Number(axes.yMin);
   const yMax = Number(axes.yMax);
-  const padX = canvas.width * 0.05;
-  const padY = canvas.height * 0.05;
+  const padX = canvas.width * graphPadding.PAD_X;
+  const padY = canvas.height * graphPadding.PAD_Y;
   const graphLeft = padX;
   const graphTop = padY;
   const graphRight = canvas.width - padX;
@@ -103,7 +103,7 @@ function drawCurveLabel(ctx, opts) {
     if (opts.lastCoord) {
       ctx.fillText(
         opts.name + " " + (opts.suffix || "1"),
-        opts.lastCoord[0] + 10,
+        opts.lastCoord[0] - 40,
         opts.lastCoord[1]
       );
     }

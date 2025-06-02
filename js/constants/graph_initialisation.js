@@ -1,10 +1,9 @@
-import {graphMode } from "./constants.js";
-import {init_variables, econVars} from "./var_initialisation.js"
-
+import { graphMode } from "./constants.js";
+import { init_variables, econVars } from "./var_initialisation.js";
 
 window.econGraphConfig = {
   variables: econVars,
-  grid: { enabled: false, steps: 10 },
+  grid: { enabled: false, steps: 5 },
   axes: {
     IS_LM_BP: {
       xMin: 0,
@@ -23,12 +22,13 @@ window.econGraphConfig = {
       yLabel: "i",
     },
     "Goods Market": {
+      // Меняем оси местами!
       xMin: 0,
-      xMax: 200,
+      xMax: 1000, // Y — выпуск
       yMin: 0,
-      yMax: 500,
-      xLabel: "E",
-      yLabel: "Y",
+      yMax: 1000, // E — расходы
+      xLabel: "Y",
+      yLabel: "E",
     },
   },
   curves: [
@@ -129,34 +129,80 @@ window.econGraphConfig = {
         "Lbar",
         "lambdaY",
         "lambdai",
-        "Cbar",
-        "mpc",
-        "phi",
-        "Ibar",
-        "b1",
-        "b2",
-        "Gbar",
-        "Tbar",
-        "tY",
-        "Xnbar",
-        "etaY",
-        "etaYstar",
-        "etaQ",
-        "Q",
-        "Ystar",
+        // "Y" убираем — будет использоваться равновесный Y из window.equilibrium
       ],
       initial: init_variables,
+      // формула для i(Ld), где Ld — ось X
       formula: `
-    function(M, vars) {
-      let Y = (vars.Cbar || 0) +
-        (vars.mpc || 0) * 100 +
-        -(vars.phi || 0) * 1 +
-        (vars.Ibar || 0) - (vars.b1 || 0) * 1 + (vars.b2 || 0) * 100 +
-        (vars.Gbar || 0) +
-        (vars.Xnbar || 0) - (vars.etaY || 0) * 100 + (vars.etaYstar || 0) * (vars.Ystar || 0) + (vars.etaQ || 0) * (vars.Q || 0);;
-      return (vars.Lbar + vars.lambdaY * Y - M) / vars.lambdai;
+    function(Ld, vars) {
+      // Используем равновесное Y
+      const Yeq = window.equilibrium.Y;
+      // Ld = Lbar + lambdaY * Yeq - lambdai * i
+      // => i = (Lbar + lambdaY * Yeq - Ld) / lambdai
+      return (vars.Lbar + vars.lambdaY * Yeq - Ld) / vars.lambdai;
     }
   `,
     },
+    {
+      graph: "Goods Market",
+      name: "Y = E",
+      color: "#27ae60",
+      width: 2,
+      variables: [],
+      initial: {},
+      formula: `
+        function(Y, vars) {
+          return Y; // E = Y
+        }
+      `,
+    },
+    {
+      graph: "Goods Market",
+      name: "E(Y, i^*)",
+      showChanged: false, // Строчка, чтобы исходное значение кривой не рисовалось
+      color: "#eb5757",
+      width: 2,
+      variables: [
+        "C",
+        "mpc",
+        "phi",
+        "I",
+        "bi",
+        "bY",
+        "G",
+        "T",
+        "tY",
+        "Xn",
+        "etaY",
+        "etaYstar",
+        "Ystar",
+        "etaQ",
+        "Q",
+        "i",
+      ],
+      initial: init_variables,
+      formula: `
+    function(Y, vars) {
+      // Берём равновесное i
+      const i_star = window.equilibrium.i;
+      // T = T̄ + tY * Y
+      const T = vars.T + vars.tY * Y;
+      // Y_d = Y - T
+      const Y_d = Y - T;
+      // C(Y_d, i)
+      const C = vars.C + vars.mpc * Y_d - vars.phi * i_star;
+      // I(i, Y)
+      const I = vars.I - vars.bi * i_star + vars.bY * Y;
+      // G
+      const G = vars.G;
+      // Xn(Q, Y, Y*)
+      const Xn = vars.Xn - vars.etaY * Y + vars.etaYstar * vars.Ystar + vars.etaQ * vars.Q;
+      // E(Y, i)
+      return C + I + G + Xn;
+    }
+  `,
+    },
+
+    ,
   ],
 };

@@ -12,3 +12,12 @@ export const graphType = {
   GRAPH_DEFAULT: "default",
   GRAPH_NEW: "new"
 }
+
+export const graphPadding = {
+  PAD_X: 0.10,
+  PAD_Y: 0.10
+}
+
+export const EquilibriumPoint = {
+  POINT_RADIOUS: 5,
+}

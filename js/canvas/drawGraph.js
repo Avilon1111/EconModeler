@@ -1,6 +1,7 @@
 import { drawAxis } from "./drawAxis.js";
 import { drawCurve } from "./drawCurve.js";
 import { graphType } from "../constants/constants.js";
+import { drawEquilibriumIfGrid } from "./drawEquilibrium.js";
 
 // --- Основная функция отрисовки ---
 export function drawCurvesOnCanvas({ canvasId, graphName }) {
@@ -20,17 +21,13 @@ export function drawCurvesOnCanvas({ canvasId, graphName }) {
 
   drawAxis({ canvasId, graphName });
   // Оси
-  const axes = config.axes[graphName]
-      ? config.axes[graphName]
-      : config.axis;
+  const axes = config.axes[graphName] ? config.axes[graphName] : config.axis;
   // --- Кривые ---
   const curvesForThis = config.curves.filter((c) => c.graph === graphName);
 
+  // Нарисовать исходную
   curvesForThis.forEach((curve) => {
-    // Получаем функцию формулы
     let formulaFn = eval("(" + curve.formula + ")");
-
-    // --- Кривая 1 - начальные переменные ---
     ctx.save();
     drawCurve({
       ctx,
@@ -41,13 +38,10 @@ export function drawCurvesOnCanvas({ canvasId, graphName }) {
       type: graphType.GRAPH_DEFAULT,
     });
     ctx.restore();
-
-
-    // --- Кривая 2 - изменённые переменные ---
     let changed = curve.variables.some(
       (key) => window.graphVarState[key] != curve.initial[key]
     );
-
+    // Нарисовать новую
     if (changed) {
       ctx.save();
       drawCurve({
@@ -61,4 +55,7 @@ export function drawCurvesOnCanvas({ canvasId, graphName }) {
       ctx.restore();
     }
   });
+
+  
+  drawEquilibriumIfGrid(config, graphName, canvas, axes);
 }

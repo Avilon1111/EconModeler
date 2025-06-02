@@ -8,6 +8,10 @@ import "./canvas/drawCurve.js";
 import "./canvas/drawGraph.js";
 import "./canvas/drawAllMarkets.js";
 
+
+import "./logic/findEquilibrium.js";
+import "./logic/equilibriumPoint.js";
+
 window.drawAllMarkets();
 window.renderControlsPanel(
   window.econGraphConfig,
