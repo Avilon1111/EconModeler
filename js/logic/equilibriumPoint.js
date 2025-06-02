@@ -78,8 +78,8 @@ export function drawEquilibriumPointOnGraph(opts) {
   ctx.textBaseline = "middle";
   ctx.fillText(
     typeof yLabel !== "undefined" ? yLabel : y.toFixed(2),
-    graphLeft - 6,
-    py
+    graphLeft + 10,
+    py - 7
   );
   ctx.restore();
 }
