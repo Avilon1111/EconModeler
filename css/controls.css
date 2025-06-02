@@ -7,7 +7,7 @@
 
 .control label {
   display: block;
-  width: 100px; /* фиксированная ширина для выравнивания */
+  width: 100px;
   text-align: right;
   margin-right: 4px;
 }
@@ -77,4 +77,3 @@
   margin: 0;
   width: auto;
 }
-

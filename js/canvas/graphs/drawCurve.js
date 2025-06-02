@@ -1,4 +1,8 @@
-import { graphType, graphMode, graphPadding} from "../constants/constants.js";
+import {
+  graphType,
+  graphMode,
+  graphPadding,
+} from "../../constants/constants.js";
 
 export function drawCurve({ ctx, curve, formulaFn, canvas, axes, type }) {
   const xMin = Number(axes.xMin);
@@ -82,7 +86,6 @@ export function drawCurve({ ctx, curve, formulaFn, canvas, axes, type }) {
     }
   }
 }
-
 
 function drawCurveLabel(ctx, opts) {
   ctx.save();

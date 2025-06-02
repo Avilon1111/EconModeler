@@ -1,4 +1,4 @@
-import { graphPadding } from "../constants/constants.js";
+import { graphPadding } from "../../constants/constants.js";
 export function drawEquilibriumPointOnGraph(opts) {
   // opts: { canvas, axes, x, y, color, show, xLabel, yLabel, pointRadius }
 
@@ -19,7 +19,8 @@ export function drawEquilibriumPointOnGraph(opts) {
   const xMax = Number(axes.xMax);
   const yMin = Number(axes.yMin);
   const yMax = Number(axes.yMax);
-
+  if (x < xMin || x > xMax || y < yMin || y > yMax) return;
+  
   const padX = canvas.width * graphPadding.PAD_X;
   const padY = canvas.height * graphPadding.PAD_Y;
   const graphLeft = padX;
@@ -67,13 +68,13 @@ export function drawEquilibriumPointOnGraph(opts) {
   ctx.fillStyle = "#111";
   ctx.textAlign = "center";
   ctx.textBaseline = "top";
-  // X 
+  // X
   ctx.fillText(
     typeof xLabel !== "undefined" ? xLabel : x.toFixed(2),
     px,
     graphBottom + 4
   );
-  // Y 
+  // Y
   ctx.textAlign = "right";
   ctx.textBaseline = "middle";
   ctx.fillText(

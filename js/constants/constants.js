@@ -21,3 +21,8 @@ export const graphPadding = {
 export const EquilibriumPoint = {
   POINT_RADIOUS: 5,
 }
+
+export const ArrowsEnd = {
+  ARROW: "arrow",
+  NO_ARROW: "no_arrow"
+}

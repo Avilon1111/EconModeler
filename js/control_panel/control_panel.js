@@ -9,7 +9,7 @@ window.renderControlsPanel = function (config, controlsSelector, onChange) {
   if (!controlsPanel) return;
   controlsPanel.innerHTML = "";
 
-  // --- Сетка (первая строка!) ---
+  // Переключатель сетки
   const gridDiv = document.createElement("div");
   gridDiv.className = "control grid-control";
 
@@ -30,21 +30,20 @@ window.renderControlsPanel = function (config, controlsSelector, onChange) {
   gridDiv.appendChild(gridCheck);
   controlsPanel.appendChild(gridDiv);
 
-  // --- Все переменные ---
+  // Управление переменными
   config.variables.forEach((variable) => {
     if (!variable.editable) return;
 
     const controlDiv = document.createElement("div");
     controlDiv.className = "control";
 
-    // --- Метка без значения ---
     const label = document.createElement("label");
     label.htmlFor = `${variable.key}-range`;
     label.innerHTML = `${variable.label}`;
     renderMath(label);
     controlDiv.appendChild(label);
 
-    // --- Числовой ввод ---
+    // Для ввода чисел с клавы
     const numberInput = document.createElement("input");
     numberInput.type = "number";
     numberInput.min = variable.min !== undefined ? variable.min : 0;
@@ -53,7 +52,7 @@ window.renderControlsPanel = function (config, controlsSelector, onChange) {
     numberInput.value = window.graphVarState[variable.key];
     numberInput.style.width = "70px";
 
-    // --- Ползунок ---
+    // Через ползунок
     const range = document.createElement("input");
     range.type = "range";
     range.id = `${variable.key}-range`;
@@ -62,14 +61,14 @@ window.renderControlsPanel = function (config, controlsSelector, onChange) {
     range.step = numberInput.step;
     range.value = numberInput.value;
 
-    // --- Синхронизация: range → number ---
+    // Синхронизируем ползунок
     range.addEventListener("input", function () {
       numberInput.value = this.value;
       window.graphVarState[variable.key] = parseFloat(this.value);
       if (typeof onChange === "function") onChange();
     });
 
-    // --- Синхронизация: number → range ---
+    // Синхронизируем синхоронизируем клау
     numberInput.addEventListener("input", function () {
       const val = parseFloat(this.value);
       window.graphVarState[variable.key] = val;

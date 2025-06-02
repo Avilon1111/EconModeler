@@ -1,5 +1,4 @@
-import { drawCurvesOnCanvas } from "./drawGraph.js";
-
+import { drawCurvesOnCanvas } from "./graphs/drawGraph.js";
 window.addEventListener("resize", window.drawAllMarkets);
 window.drawAllMarkets = function () {
   drawCurvesOnCanvas({
@@ -14,4 +13,6 @@ window.drawAllMarkets = function () {
     canvasId: "econ-graph-goods",
     graphName: "Goods Market",
   });
+
+  window.drawEconFlow();
 };

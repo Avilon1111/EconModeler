@@ -1,6 +1,6 @@
 import { drawAxis } from "./drawAxis.js";
 import { drawCurve } from "./drawCurve.js";
-import { graphType } from "../constants/constants.js";
+import { graphType } from "../../constants/constants.js";
 import { drawEquilibriumIfGrid } from "./drawEquilibrium.js";
 
 // --- Основная функция отрисовки ---
@@ -56,6 +56,5 @@ export function drawCurvesOnCanvas({ canvasId, graphName }) {
     }
   });
 
-  
   drawEquilibriumIfGrid(config, graphName, canvas, axes);
 }

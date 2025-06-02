@@ -1,6 +1,6 @@
-import { graphPadding } from "../constants/constants.js";
+import { graphPadding } from "../../constants/constants.js";
 
-// --- Функция для рисования стрелки на концах осей ---
+// Функция для рисования стрелки на концах осей
 export function drawAxisArrow(ctx, x0, y0, x1, y1, size = 14, color = "#222") {
   const angle = Math.atan2(y1 - y0, x1 - x0);
   ctx.save();

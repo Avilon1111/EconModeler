@@ -1,6 +1,6 @@
 import { findEquilibriumISLM } from "../logic/findEquilibrium.js";
 import { drawEquilibriumPointOnGraph } from "../logic/equilibriumPoint.js";
-import { EquilibriumPoint } from "../constants/constants.js";
+import { EquilibriumPoint } from "../../constants/constants.js";
 
 export function drawEquilibriumIfGrid(config, graphName, canvas, axes) {
   const IS = config.curves.find(
@@ -30,7 +30,7 @@ export function drawEquilibriumIfGrid(config, graphName, canvas, axes) {
   window.equilibrium = equilibrium;
 
   if (!window.econShowGrid) {
-      return;
+    return;
   }
   if (equilibrium) {
     // Равновесие на IS_LM_BP
