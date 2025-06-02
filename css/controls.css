@@ -1,0 +1,22 @@
+.control {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  font-size: 1.08em;
+}
+
+.control label {
+  min-width: 75px;
+  flex-shrink: 0;
+  margin-right: auto;
+}
+
+.control input[type="range"] {
+  flex: 1 1 0;
+  min-width: 0;
+  margin-left: 10px;
+}
+
+.grid-control {
+  gap: 10px;
+}

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <title>IS-LM-BP</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="controller-header">
+      <div class="nav-buttons">
+        <button id="model-controller">Запустить модель</button>
+        <button id="button-left"><</button>
+        <button id="button-right">></button>
+      </div>
+    </header>
+
+    <div class="main-content">
+      <!--Левый столбец-->
+      <div class="left-col">
+        <div class="econ-model-canvas">
+          <canvas id="econ-model"></canvas>
+        </div>
+        <div class="controls-panel" id="controls-panel"></div>
+      </div>
+      <!--Правый столбец-->
+      <div class="right-col">
+        <div class="right-top-graph">
+          <canvas id="econ-graph-main"></canvas>
+        </div>
+        <div class="right-bottom-graphs">
+          <!--Графики-->
+          <div class="econ-graph money-market">
+            <canvas id="econ-graph-money"></canvas>
+          </div>
+          <div class="econ-graph goods-market">
+            <canvas id="econ-graph-goods"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

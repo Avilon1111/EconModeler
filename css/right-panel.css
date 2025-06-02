@@ -1,0 +1,51 @@
+.right-top-graph {
+  width: 100%;
+  height: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  border-bottom: 1px solid #ddd;
+}
+
+#econ-graph-main {
+  width: 95%;
+  height: 90%;
+  display: block;
+  background: #fff;
+  border: 1px solid #aaa;
+  border-radius: 0;
+}
+
+.right-bottom-graphs {
+  width: 100%;
+  height: 50%;
+  display: flex;
+  flex-direction: row;
+  background: #fff;
+}
+
+.econ-graph.money-market,
+.econ-graph.goods-market {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  border-right: 1px solid #eee;
+}
+
+.econ-graph.goods-market {
+  border-right: none;
+}
+
+#econ-graph-money,
+#econ-graph-goods {
+  width: 90%;
+  height: 90%;
+  display: block;
+  background: #fff;
+  border: 1px solid #aaa;
+  border-radius: 0;
+}
