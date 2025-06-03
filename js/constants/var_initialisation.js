@@ -172,7 +172,7 @@ export const econVars = [
     key: "istar",
     label: "$i^*$",
     value: init_variables["istar"],
-    editable: varMode.EDITABLE,
+    editable: varMode.NOT_EDITABLE,
     min: 0,
     max: 10,
     step: 0.01,
