@@ -1,8 +1,11 @@
+import { PARAM_DESCRIPTIONS } from "../constants/var_initialisation.js";
+
 function renderMath(labelElement) {
   if (window.MathJax && window.MathJax.typesetPromise) {
     MathJax.typesetPromise([labelElement]);
   }
 }
+
 
 window.renderControlsPanel = function (config, controlsSelector, onChange) {
   const controlsPanel = document.querySelector(controlsSelector);
@@ -43,6 +46,26 @@ window.renderControlsPanel = function (config, controlsSelector, onChange) {
     renderMath(label);
     controlDiv.appendChild(label);
 
+    // Добавляем описание для переменных
+    const infoIcon = document.createElement("span");
+    infoIcon.innerHTML = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+  <circle cx="12" cy="12" r="11" stroke="#2979ff" stroke-width="2" fill="#fff"/>
+  <text x="12" y="16" text-anchor="middle" font-size="12" fill="#2979ff" font-family="Arial" font-weight="bold">i</text>
+</svg>`;
+    infoIcon.style.cursor = "pointer";
+    infoIcon.style.marginLeft = "8px";
+    infoIcon.style.display = "inline-block";
+    infoIcon.style.verticalAlign = "middle";
+    infoIcon.className = "econ-tooltip-icon";
+
+    const tooltipText = document.createElement("div");
+    tooltipText.className = "econ-tooltip-text";
+    tooltipText.textContent =
+      PARAM_DESCRIPTIONS[variable.key] || "Нет описания";
+    infoIcon.appendChild(tooltipText);
+
+    controlDiv.appendChild(infoIcon);
+
     // Для ввода чисел с клавы
     const numberInput = document.createElement("input");
     numberInput.type = "number";
@@ -68,7 +91,7 @@ window.renderControlsPanel = function (config, controlsSelector, onChange) {
       if (typeof onChange === "function") onChange();
     });
 
-    // Синхронизируем синхоронизируем клау
+    // Синхронизируем синхоронизируем клаву
     numberInput.addEventListener("input", function () {
       const val = parseFloat(this.value);
       window.graphVarState[variable.key] = val;
@@ -78,6 +101,7 @@ window.renderControlsPanel = function (config, controlsSelector, onChange) {
 
     controlDiv.appendChild(numberInput);
     controlDiv.appendChild(range);
+
     controlsPanel.appendChild(controlDiv);
   });
 };
