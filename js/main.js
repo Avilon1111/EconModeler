@@ -7,9 +7,10 @@ import "./canvas/graphs/drawAxis.js";
 import "./canvas/graphs/drawCurve.js";
 import "./canvas/drawAllMarkets.js";
 import "./canvas/econCanvas/drawEconFlow.js";
-
 import "./canvas/logic/findEquilibrium.js";
 import "./canvas/logic/equilibriumPoint.js";
+
+import { setupModelInfoButton } from "./header/button_model_info.js";
 
 // === Динамически загружаем MathJax ===
 window.MathJax = {
@@ -26,6 +27,9 @@ const script = document.createElement("script");
 script.src = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js";
 script.async = true;
 document.head.appendChild(script);
+
+// Рисуем кнопку ? на header
+setupModelInfoButton();
 
 // Рисуем рынки
 window.drawAllMarkets();
