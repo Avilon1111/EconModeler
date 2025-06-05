@@ -48,7 +48,7 @@ export function DrawBlocks(ctx, Y, i, varState, initVars, baseY, basei) {
     },
     {
       name: "Государство",
-      rect: [320, 180, 120, 50],
+      rect: [320, 170, 120, 50],
       value: saldo,
       base: baseSaldo,
       formula: "T-G",
@@ -70,12 +70,21 @@ export function DrawBlocks(ctx, Y, i, varState, initVars, baseY, basei) {
     },
     {
       name: "Финансовый рынок",
-      rect: [300, 300, 160, 50],
+      rect: [300, 250, 160, 50],
       value: i,
       base: basei, // Ставка стартовая
       formula: "i",
       invert: true,
       ellipse: true,
+    },
+
+    {
+      name: "Рынок экономических ресурсов",
+      rect: [270, 320, 250, 50],
+      formula: "",
+      invert: true,
+      ellipse: true,
+      changes: false,
     },
   ];
 
@@ -106,7 +115,12 @@ export function DrawBlocks(ctx, Y, i, varState, initVars, baseY, basei) {
       ctx.stroke();
     }
 
+    
     // Текст блока
+    let text_delta = 10;
+    if (b.changes == false) {
+      text_delta = 0;
+    }
     ctx.fillStyle = "#111";
     ctx.font = "bold 15px Arial";
     ctx.textAlign = "center";
@@ -114,7 +128,7 @@ export function DrawBlocks(ctx, Y, i, varState, initVars, baseY, basei) {
     ctx.fillText(
       b.name,
       b.rect[0] + b.rect[2] / 2,
-      b.rect[1] + b.rect[3] / 2 - 10
+      b.rect[1] + b.rect[3] / 2 - text_delta
     );
     ctx.font = "italic 13px Arial";
     ctx.fillText(

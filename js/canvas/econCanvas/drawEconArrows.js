@@ -47,9 +47,9 @@ export function DrawArrows(ctx) {
   labelArrow("Чистый экспорт", 140, -20, 370, 90);
 
   // Иностранный -> финансовый
-  arrow(40, 70, 40, 320, ArrowsEnd.NO_ARROW);
-  arrow(40, 320, 300, 320, ArrowsEnd.NO_ARROW);
-  labelArrow("Движение капитала", 80, 300, 300, 320, 0, 0);
+  arrow(40, 70, 40, 280, ArrowsEnd.NO_ARROW);
+  arrow(40, 280, 300, 280, ArrowsEnd.NO_ARROW);
+  labelArrow("Движение капитала", 120, 260, 300, 320, 0, 0);
 
   // Домохозяйства -> Товары и услуги
   arrow(120, 200, 120, 110, ArrowsEnd.NO_ARROW);
@@ -57,18 +57,22 @@ export function DrawArrows(ctx) {
   labelArrow("Потребительские расходы C", 120, 90, 280, 110);
 
   // Домохозяйства -> Финансовый рынок
-  arrow(220, 250, 320, 250, ArrowsEnd.NO_ARROW);
-  arrow(320, 250, 320, 310, ArrowsEnd.ARROW);
-  labelArrow("Сбережения", 220, 160, 320, 310);
+  arrow(220, 240, 320, 240, ArrowsEnd.NO_ARROW);
+  arrow(320, 240, 320, 260, ArrowsEnd.ARROW);
+  labelArrow("Сбережения", 220, 150, 320, 310);
 
   //  Финансовый рынок->Домохозяйства
   arrow(120, 340, 120, 260, ArrowsEnd.ARROW);
-  arrow(120, 340, 320, 340, ArrowsEnd.NO_ARROW);
-  labelArrow("Доходы", 220, 390, 320, 310);
+  arrow(120, 340, 270, 340, ArrowsEnd.NO_ARROW);
+  labelArrow("Доходы", 80, 390, 320, 310);
 
   // Государство -> Товары и услуги *Гоззакупки
-  arrow(380, 180, 380, 140, ArrowsEnd.ARROW);
-  labelArrow("Госзакупки", 450, 180, 380, 140);
+  arrow(380, 170, 380, 140, ArrowsEnd.ARROW);
+  labelArrow("Госзакупки", 460, 170, 380, 140);
+
+  // Финансовый рынок -> Государство 
+  arrow(380, 250, 380, 220, ArrowsEnd.NO_ARROW);
+  // labelArrow("Займ при дефиците", 450, 190, 380, 280);
 
   // Товары и услуги -> Фирмы
   arrow(460, 100, 650, 100, ArrowsEnd.NO_ARROW);
@@ -78,14 +82,19 @@ export function DrawArrows(ctx) {
   // Фирмы -> Товары и услуги
   arrow(590, 130, 460, 130, ArrowsEnd.ARROW);
   arrow(590, 200, 590, 130, ArrowsEnd.NO_ARROW);
-  labelArrow("Издержки", 590, 160, 460, 130, 0, 0);
+  labelArrow("Инвест. расходы", 590, 160, 460, 130, 0, 0);
 
-  // Государство -> чистые налоги
-  arrow(550, 220, 440, 220, ArrowsEnd.ARROW);
-  labelArrow("Чистые налоги T", 440, 200, 550, 220);
+  // ДХ -> Государство
+  arrow(220, 210, 320, 210, ArrowsEnd.ARROW);
+  labelArrow("Чистые налоги T", 0, 180, 540, 220);
 
-  // Фирмы -> финансовый рынок
-  arrow(640, 330, 460, 330, ArrowsEnd.ARROW);
-  arrow(640, 260, 640, 330, ArrowsEnd.NO_ARROW);
-  labelArrow("Инвестиционные средства", 640, 300, 460, 330);
+  // Фирмы -> Рынок экономических ресурсов
+  arrow(640, 340, 518, 340, ArrowsEnd.ARROW);
+  arrow(640, 260, 640, 340, ArrowsEnd.NO_ARROW);
+  labelArrow("Издержки", 640, 330, 520, 330);
+
+  //  Финансовый рынок -> Фирмы
+  arrow(460, 275, 580, 275, ArrowsEnd.NO_ARROW);
+  arrow(580, 275, 580, 260, ArrowsEnd.ARROW);
+  labelArrow("Инвестиции", 440, 275, 580, 260);
 }
