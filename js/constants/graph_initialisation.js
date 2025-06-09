@@ -5,7 +5,7 @@ window.econGraphConfig = {
   variables: econVars,
   grid: { enabled: false, steps: 5 },
   axes: {
-    IS_LM_BP: {
+    IS_LM: {
       xMin: 0,
       xMax: 1000,
       yMin: 0,
@@ -33,7 +33,7 @@ window.econGraphConfig = {
   },
   curves: [
     {
-      graph: "IS_LM_BP",
+      graph: "IS_LM",
       name: "IS",
       color: "#2f80ed",
       mode: graphMode.GRAPH_DEFAULT,
@@ -67,7 +67,7 @@ window.econGraphConfig = {
       `,
     },
     {
-      graph: "IS_LM_BP",
+      graph: "IS_LM",
       name: "LM",
       color: "#27ae60",
       mode: graphMode.GRAPH_DEFAULT,
@@ -80,34 +80,34 @@ window.econGraphConfig = {
         }
       `,
     },
-    {
-      graph: "IS_LM_BP",
-      name: "BP",
-      color: "#eb5757",
-      mode: graphMode.GRAPH_DEFAULT,
-      width: 2,
-      variables: [
-        "Xn",
-        "etaYstar",
-        "Ystar",
-        "etaQ",
-        "Q",
-        "c",
-        "istar",
-        "theta",
-        "etaY",
-      ],
-      initial: init_variables,
-      formula: `
-        function(Y, vars) {
-        if (vars.c == 0){
-            return vars.istar;
-        }
-          const num = vars.Xn - vars.etaYstar * vars.Ystar + vars.etaQ * vars.Q - vars.c * (vars.istar + vars.theta);
-          return (vars.etaY * Y - num) / vars.c;
-        }
-      `,
-    },
+    // {
+    //   graph: "IS_LM",
+    //   name: "BP",
+    //   color: "#eb5757",
+    //   mode: graphMode.GRAPH_DEFAULT,
+    //   width: 2,
+    //   variables: [
+    //     "Xn",
+    //     "etaYstar",
+    //     "Ystar",
+    //     "etaQ",
+    //     "Q",
+    //     "c",
+    //     "istar",
+    //     "theta",
+    //     "etaY",
+    //   ],
+    //   initial: init_variables,
+    //   formula: `
+    //     function(Y, vars) {
+    //     if (vars.c == 0){
+    //         return vars.istar;
+    //     }
+    //       const num = vars.Xn - vars.etaYstar * vars.Ystar + vars.etaQ * vars.Q - vars.c * (vars.istar + vars.theta);
+    //       return (vars.etaY * Y - num) / vars.c;
+    //     }
+    //   `,
+    // },
     {
       graph: "Money Market",
       name: "L_s",

@@ -3,7 +3,7 @@ window.addEventListener("resize", window.drawAllMarkets);
 window.drawAllMarkets = function () {
   drawCurvesOnCanvas({
     canvasId: "econ-graph-main",
-    graphName: "IS_LM_BP",
+    graphName: "IS_LM",
   });
   drawCurvesOnCanvas({
     canvasId: "econ-graph-money",

@@ -4,10 +4,10 @@ import { EquilibriumPoint } from "../../constants/constants.js";
 
 export function drawEquilibriumIfGrid(config, graphName, canvas, axes) {
   const IS = config.curves.find(
-    (c) => c.graph === "IS_LM_BP" && c.name === "IS"
+    (c) => c.graph === "IS_LM" && c.name === "IS"
   );
   const LM = config.curves.find(
-    (c) => c.graph === "IS_LM_BP" && c.name === "LM"
+    (c) => c.graph === "IS_LM" && c.name === "LM"
   );
   const isChanged = IS.variables.some(
     (key) => window.graphVarState[key] != IS.initial[key]
@@ -33,8 +33,8 @@ export function drawEquilibriumIfGrid(config, graphName, canvas, axes) {
     return;
   }
   if (equilibrium) {
-    // Равновесие на IS_LM_BP
-    if (graphName === "IS_LM_BP") {
+    // Равновесие на IS_LM
+    if (graphName === "IS_LM") {
       drawEquilibriumPointOnGraph({
         canvas,
         axes,
